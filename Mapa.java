@@ -1,6 +1,9 @@
 // package sem4.zal1;
 
+import java.net.PasswordAuthentication;
+
 public class Mapa<K, V> {
+    private Mapa<K, V> head;
     int size = 6;
     Node<K, V>[] nodes = new Node[size];
 
@@ -21,7 +24,7 @@ public class Mapa<K, V> {
         return null;
     }
 
-    private int getIndex(K key) {
+    public int getIndex(K key) {
         return Math.abs(key.hashCode()) % size;
     }
 
@@ -37,6 +40,51 @@ public class Mapa<K, V> {
         return null;
     }
 
+    public V replace(K key, V value) {
+        int index = getIndex(key);
+        Node<K, V> currentNode = nodes[index];
+        while (currentNode != null) {
+            if (currentNode.key.equals(key)) {
+                currentNode.value = value;
+            }
+            return currentNode.value;
+        }
+        return null;
+    }
+
+    public int sizeHash() {
+        int count = 0;
+        for (int i = 0; i < nodes.length; i++) {
+            // Node<K, V> newnNode = nodes[i]; //
+            count++;
+        }
+        return count;
+    }
+
+    public boolean containsKey(K key) {
+        int index = getIndex(key);
+        Node<K, V> currentNode = nodes[index];
+        while (currentNode != null) {
+            if (currentNode.key == key) {
+                return true;
+            }
+            currentNode = currentNode.nextNode;
+        }
+        return false;
+    }
+
+    public boolean containsValue(V value) {
+        for (int i = 0; i < nodes.length; i++) {
+            Node<K, V> neweNode = nodes[i];
+            System.out.println(neweNode.value);
+            if (neweNode != null && neweNode.value == value) {
+                return true;
+            }
+        }
+        return false;
+
+    }
+
     public V remove(K key) {
         int index = getIndex(key);
         Node<K, V> currentNode = nodes[index];
@@ -48,7 +96,8 @@ public class Mapa<K, V> {
                     nodes[index] = currentNode.nextNode;
                 else if (currentNode.nextNode == null)
                     previousNode.nextNode = null;
-                else previousNode.nextNode = currentNode.nextNode;
+                else
+                    previousNode.nextNode = currentNode.nextNode;
                 return tmp;
             }
             previousNode = currentNode;
@@ -72,14 +121,14 @@ public class Mapa<K, V> {
         }
         return null;
     }
+
 }
 
-
 // public static void main(String[] args) {
-//     Node<Integer, String> node = new Node<>();
-//     node.key = 12;
-//     node.value = "12";
+// Node<Integer, String> node = new Node<>();
+// node.key = 12;
+// node.value = "12";
 //
-//     node.key.hashCode();
-//     // System.out.println(node.value.hashCode() % 16);
+// node.key.hashCode();
+// // System.out.println(node.value.hashCode() % 16);
 // }
