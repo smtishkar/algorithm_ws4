@@ -1,7 +1,3 @@
-// package sem4.zal1;
-
-import java.util.Random;
-
 public class Seminar4 {
     public static void main(String[] args) {
         Mapa<String, String> mapa = new Mapa<>();
@@ -20,7 +16,8 @@ public class Seminar4 {
         // System.out.println(mapa.get("13"));
         // System.out.println(mapa.sizeHash());
         // System.out.println(mapa.containsKey("12"));
-        System.out.println(mapa.containsValue("100"));
+        System.out.println(mapa.containsValue("110"));
+        // System.out.println(mapa.containsValue2("110"));
         
         
         // for (int i = 0; i < 5; i++) {

@@ -1,9 +1,5 @@
-// package sem4.zal1;
-
-import java.net.PasswordAuthentication;
-
 public class Mapa<K, V> {
-    private Mapa<K, V> head;
+
     int size = 6;
     Node<K, V>[] nodes = new Node[size];
 
@@ -55,7 +51,6 @@ public class Mapa<K, V> {
     public int sizeHash() {
         int count = 0;
         for (int i = 0; i < nodes.length; i++) {
-            // Node<K, V> newnNode = nodes[i]; //
             count++;
         }
         return count;
@@ -74,15 +69,33 @@ public class Mapa<K, V> {
     }
 
     public boolean containsValue(V value) {
+        int index = 0;
+        int size = 0;
+        Node<K, V> node = nodes[index];
+        while (nodes.length > size) {
+            node = nodes[index];
+            while (node != null) {
+                if (node.value.equals(value)) {
+                    return true;
+                } else {
+                    node = node.nextNode;
+                }
+            }
+            size++;
+            index++;
+        }
+        return false;
+    }
+
+    public boolean containsValue2(V value) {
+
         for (int i = 0; i < nodes.length; i++) {
-            Node<K, V> neweNode = nodes[i];
-            System.out.println(neweNode.value);
-            if (neweNode != null && neweNode.value == value) {
+            Node<K, V> currentNode = nodes[i];
+            if (currentNode != null && currentNode.value == value) {
                 return true;
             }
         }
         return false;
-
     }
 
     public V remove(K key) {
